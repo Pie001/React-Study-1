@@ -1,0 +1,70 @@
+<!-- 2. 태그 기입법(JSX) (babel 필수) 
+        - 바벨을 이용하면 바벨이 JSX 문법을 createElement 로 변환시켜줌.
+        - 컴포넌트의 장점 : 원하는 갯수만큼 쉽게 늘릴 수 있다.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>구구단</title>
+        <!-- 리액트가 동작하는 핵심 코드 -->
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <!-- 리액트코드를 웹에 붙여주는 역할 -->
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <!-- javascript 안에 html 문법을 사용하는 등 최신 문법을 사용하기 위해 사용하는것이 babel -->
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div> <!-- 결과 : <div id="root"><button>Like</button></div> -->
+        <script type="text/babel">
+            // 함수 컴포넌트(Hooks Compoment)
+            // React.useState(...) 처럼 use 로 시작하는 애들이 Hooks 임.
+            const GuGuDan = () => {
+                // 변경이 발생하는 값의 선언
+                const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
+                const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
+                const [value, setValue] = React.useState('');
+                const [result, setResult] = React.useState('');
+                const inputRef = React.useRef(null); // ref
+                
+                const onChangeInput = (e) => {
+                    setValue(e.target.value);
+
+                };
+
+                const onSubmitForm = (e) => {
+                    e.preventDefault();
+                    if (parseInt(value) == first * second) {
+                        setResult('정답 : ' + value);
+                        setFirst(Math.ceil(Math.random() * 9));
+                        setSecond(Math.ceil(Math.random() * 9));
+                        setValue('');
+                        // inputRef
+                        inputRef.current.focus();
+                    } else {
+                        setResult('땡');
+                        setValue('');
+                        inputRef.current.focus();
+                    }
+                };
+
+                // 리액트 안에서는 기존의 class -> className, for -> htmlFor 로 기입해야지 해당 속성대로 적용된다.
+                return (
+                    <React.Fragment>
+                        <div>{first} 곱하기 {second}는?</div>
+                        <form onSubmit={onSubmitForm}>
+                            <input ref={inputRef} onChange={onChangeInput} value={value}/>
+                            <button>입력!</button>
+                        </form>
+                        <div id="result">{result}</div>
+                    </React.Fragment>
+                );
+            } 
+
+        </script>
+        <script type="text/babel">
+            // 닫는 괄호 필수.
+            ReactDOM.render(<GuGuDan />, document.querySelector('#root'));
+            // ReactDOM.render(<div><LikeButton /><LikeButton /><LikeButton /><LikeButton /><LikeButton /><LikeButton /><LikeButton /></div>, document.querySelector('#root'));
+        </script>
+    </body>
+</html>

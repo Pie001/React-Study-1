@@ -1,0 +1,40 @@
+<!-- 2. 태그 기입법(JSX) (babel 필수) 
+        - 바벨을 이용하면 바벨이 JSX 문법을 createElement 로 변환시켜줌.
+        - 컴포넌트의 장점 : 원하는 갯수만큼 쉽게 늘릴 수 있다.
+-->
+<html>
+    <head>
+        <!-- 리액트가 동작하는 핵심 코드 -->
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <!-- 리액트코드를 웹에 붙여주는 역할 -->
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <!-- javascript 안에 html 문법을 사용하는 등 최신 문법을 사용하기 위해 사용하는것이 babel -->
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div> <!-- 결과 : <div id="root"><button>Like</button></div> -->
+        <script type="text/babel">
+            class LikeButton extends React.Component {
+                constructor(props){
+                    super(props);
+                    this.state = {
+                        liked: false,
+                    };
+                }
+
+                render(){
+                    // 컨텐트 부분에 중괄호"{}" 를 감싸주면 내부에서 자바스크립 사용 가능.
+                    return <button type="submit" onClick={() => { this.setState({ liked: true })} }>
+                    { this.state.liked === true ? 'Liked' : 'Like' }
+                    </button>;
+                    // JSX = Javascript + XML
+                }
+            }
+        </script>
+        <script type="text/babel">
+            // 닫는 괄호 필수.
+            ReactDOM.render(<LikeButton />, document.querySelector('#root'));
+            // ReactDOM.render(<div><LikeButton /><LikeButton /><LikeButton /><LikeButton /><LikeButton /><LikeButton /><LikeButton /></div>, document.querySelector('#root'));
+        </script>
+    </body>
+</html>

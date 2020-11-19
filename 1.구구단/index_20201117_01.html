@@ -1,0 +1,36 @@
+<!-- 1. 초기 기입법 -->
+<html>
+    <head>
+        <!-- 리액트가 동작하는 핵심 코드 -->
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <!-- 리액트코드를 웹에 붙여주는 역할 -->
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    </head>
+    <body>
+        <div id="root"></div> <!-- 결과 : <div id="root"><button>Like</button></div> -->
+        <script>
+            const e = React.createElement;
+            // 클래스 하나가 컴포넌트 하나
+            class LikeButton extends React.Component {
+                constructor(props){
+                    super(props);
+                    this.state = {
+                        liked: false,
+                    };
+                }
+
+                render(){
+                    // 태그를 만들어 주는 함수
+                    return e('button', 
+                    { onClick:() => { this.setState({ liked: true })}, type: 'submit' },
+                    this.state.liked === true ?  'Liked' : 'Like'); 
+                    // <button onclick="() => { console.log('clicked') }" type="submit">Like</button>
+                }
+            }
+        </script>
+        <script>
+            // 리액트로 컴포넌트 만든걸 리액트 돔이 렌더링(화면에 반영)해줌
+            ReactDOM.render(e(LikeButton), document.querySelector('#root'));
+        </script>
+    </body>
+</html>
