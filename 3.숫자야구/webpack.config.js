@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 /*
 핫리로딩에 필요한 패키지
@@ -13,10 +13,11 @@ const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 */
 
+process.env.NODE_ENV = 'development';
 
 module.exports = {
     name: 'wordrelay-setting',
-    mode: 'development', // 실서비스: production
+    mode: 'development', // 실서비스: production // development
     devtool: 'eval',
     resolve: {
         extensions: ['.js', '.jsx']
@@ -41,14 +42,14 @@ module.exports = {
                     }], '@babel/preset-react'], // plugin 들의 모음이 preset 임.
                 plugins: [
                     '@babel/plugin-proposal-class-properties',
-                    'react-refresh/babel'
+                    // 'react-refresh/babel'
                     ]
             },
         }],
     },
     plugins: [
         new webpack.LoaderOptionsPlugin({ debug: true }),
-        new RefreshWebpackPlugin(),
+        // new RefreshWebpackPlugin(),
     ], // 추가적으로 붙이고 싶은 것들이 있으면 여기
 
     output: {

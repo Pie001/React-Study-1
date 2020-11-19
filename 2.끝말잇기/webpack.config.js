@@ -2,18 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
-/*
-핫리로딩에 필요한 패키지
-1. @pmmmwh/react-refresh-webpack-plugin
-2. react-refresh/babel
-
-리로딩과 핫리로딩의 차이점
-- 리로딩 : 새로고침(=브라우저 새로고침)
-- 핫리로딩 : 기존데이터 유지하면서 화면을 바꿔줌
-
-*/
-
-
 module.exports = {
     name: 'wordrelay-setting',
     mode: 'development', // 실서비스: production
@@ -56,7 +44,7 @@ module.exports = {
         // path는 실제경로. publicPath 는 가상의 경로(상대경로)
         path: path.join(__dirname, 'dist'), // path.join 은 현재폴더 경로 + dist 를 반환함
         filename: 'app.js',
-        publicPath: '/dist/', // publicPath 는 node의 express.static 과 비슷
+        //publicPath: '/dist/', // publicPath 는 node의 express.static 과 비슷
     }, // 출력
     
     devServer: {
